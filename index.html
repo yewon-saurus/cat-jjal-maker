@@ -42,15 +42,43 @@
         return <h1>{props.children}</h1>;
       };
 
-      const Form = ({ handleFormSubmit }) => {
+      const Form = ({updateMainCat}) => {
+        const includesHangul = (text) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/i.test(text);
+        const [value, setValue] = React.useState("");
+        const [errorMesssage, setErrorMessage] = React.useState("");
+
+        function handleInputChange(e) {
+          const userValue = e.target.value;
+          setErrorMessage("");
+          
+          if (includesHangul(userValue)) {
+            setErrorMessage("한글은 입력할 수 없습니다.");
+          }
+          setValue(userValue.toUpperCase());
+        }
+
+        function handleFormSubmit(e) {
+          e.preventDefault();
+          setErrorMessage("");
+
+          if (value === "") {
+            setErrorMessage("빈 값으로 생성할 수 없습니다.");
+            return; // 함수가 아래의 updateMainCat() 까지 불리지 않고 끝날 수 있게..
+          }
+          updateMainCat();
+        }
+
         return (
           <form onSubmit={handleFormSubmit}>
             <input
               type="text"
               name="name"
               placeholder="영어 대사를 입력해주세요"
+              value={value}
+              onChange={handleInputChange}
             />
             <button type="submit">생성</button>
+            <p style={{color: "red"}}>{errorMesssage}</p>
           </form>
         );
       };
@@ -73,11 +101,11 @@
         );
       }
 
-      const MainCard = ({ img, handleHeartClick }) => {
+      const MainCard = ({ img, onHeartClick }) => {
         return (
           <div className="main-card">
             <img src={img} alt="고양이" width="400" />
-            <button onClick={handleHeartClick}>🤍</button>
+            <button onClick={onHeartClick}>🤍</button>
           </div>
         );
       };
@@ -94,25 +122,20 @@
         const [mainCat, setMaincat] = React.useState(CAT1);
         const [favorites, setFavorites] = React.useState([CAT1, CAT2]);
 
-        console.log("카운터", counter);
-
-        function handleFormSubmit(event) {
-          event.preventDefault();
-          console.log("폼 전송됨");
-          setCounter(counter + 1);
+        function updateMainCat(event) {
           setMaincat(CAT2);
+          setCounter(counter + 1);
         }
 
         function handleHeartClick() {
-          console.log("하트 눌렀음");
           setFavorites([...favorites, CAT3]);
         }
 
         return (
           <div>
             <Title>{counter}번째 고양이 가라사대</Title>
-            <Form handleFormSubmit={handleFormSubmit} />
-            <MainCard img={mainCat} handleHeartClick={handleHeartClick} />
+            <Form updateMainCat={updateMainCat} />
+            <MainCard img={mainCat} onHeartClick={handleHeartClick} />
             <Favorites favorites={favorites} />
           </div>
         );
