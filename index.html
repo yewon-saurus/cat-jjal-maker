@@ -36,6 +36,15 @@
     ></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script type="text/babel">
+      const jsonLocalStorage = {
+        setItem: (key, value) => {
+          localStorage.setItem(key, JSON.stringify(value));
+        },
+        getItem: (key) => {
+          return JSON.parse(localStorage.getItem(key));
+        },
+      };
+
       console.log("야옹");
 
       const Title = (props) => {
@@ -118,17 +127,21 @@
         const CAT3 =
           "https://cataas.com/cat/595f280b557291a9750ebf65/says/JavaScript";
 
-        const [counter, setCounter] = React.useState(1);
+        const [counter, setCounter] = React.useState(jsonLocalStorage.getItem("counter"));
         const [mainCat, setMaincat] = React.useState(CAT1);
-        const [favorites, setFavorites] = React.useState([CAT1, CAT2]);
+        const [favorites, setFavorites] = React.useState(jsonLocalStorage.getItem("favorites") || []);
 
         function updateMainCat(event) {
           setMaincat(CAT2);
-          setCounter(counter + 1);
+          const nextCounter = counter + 1;
+          setCounter(nextCounter);
+          jsonLocalStorage.setItem('counter', nextCounter);
         }
 
         function handleHeartClick() {
-          setFavorites([...favorites, CAT3]);
+          const nextFavorites = [...favorites, mainCat];
+          setFavorites(nextFavorites);
+          jsonLocalStorage.setItem('favorites', nextFavorites);
         }
 
         return (
