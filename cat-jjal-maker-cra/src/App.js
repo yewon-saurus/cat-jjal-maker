@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React from "react";
 import Title from "./components/Title"
@@ -71,7 +70,7 @@ function CatItem(props) {
 }
 
 function Favorites({ favorites }) {
-  if (favorites.lenth === 0) {
+  if (favorites.length === 0) {
     return (
       <div>사진 위 하트를 눌러 고양이 사진을 저장해보세요!</div>
     )
@@ -99,10 +98,6 @@ const MainCard = ({ img, onHeartClick, alreadyFavorite }) => {
 const App = () => {
   const CAT1 =
     "https://cataas.com/cat/60b73094e04e18001194a309/says/react";
-  const CAT2 =
-    "https://cataas.com//cat/5e9970351b7a400011744233/says/inflearn";
-  const CAT3 =
-    "https://cataas.com/cat/595f280b557291a9750ebf65/says/JavaScript";
 
   const [counter, setCounter] = React.useState(() => {
     return jsonLocalStorage.getItem("counter");
