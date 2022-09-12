@@ -45,6 +45,13 @@
         },
       };
 
+      const fetchCat = async (text) => {
+        const OPEN_API_DOMAIN = "https://cataas.com";
+        const response = await fetch(`${OPEN_API_DOMAIN}/cat/says/${text}?json=true`);
+        const responseJson = await response.json();
+        return `${OPEN_API_DOMAIN}/${responseJson.url}`;
+      };
+
       console.log("야옹");
 
       const Title = (props) => {
@@ -74,7 +81,7 @@
             setErrorMessage("빈 값으로 생성할 수 없습니다.");
             return; // 함수가 아래의 updateMainCat() 까지 불리지 않고 끝날 수 있게..
           }
-          updateMainCat();
+          updateMainCat(value);
         }
 
         return (
@@ -131,8 +138,19 @@
         const [mainCat, setMaincat] = React.useState(CAT1);
         const [favorites, setFavorites] = React.useState(jsonLocalStorage.getItem("favorites") || []);
 
-        function updateMainCat(event) {
-          setMaincat(CAT2);
+        async function setInitialCat() {
+          const newCat = await fetchCat('First cat');
+          setMaincat(newCat);
+        }
+
+        React.useEffect(() => {
+          setInitialCat();
+        }, []);
+
+        async function updateMainCat(value) {
+          const newCat = await fetchCat(value);
+
+          setMaincat(newCat);
           const nextCounter = counter + 1;
           setCounter(nextCounter);
           jsonLocalStorage.setItem('counter', nextCounter);
