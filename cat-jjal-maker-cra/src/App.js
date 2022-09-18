@@ -1,6 +1,9 @@
 import './App.css';
 import React from "react";
 import Title from "./components/Title"
+import Form from "./components/Form"
+import MainCard from './components/MainCard';
+import Favorites from './components/Favorites';
 
 const jsonLocalStorage = {
   setItem: (key, value) => {
@@ -19,81 +22,6 @@ const fetchCat = async (text) => {
 };
 
 console.log("야옹");
-
-const Form = ({ updateMainCat }) => {
-  const includesHangul = (text) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/i.test(text);
-  const [value, setValue] = React.useState("");
-  const [errorMesssage, setErrorMessage] = React.useState("");
-
-  function handleInputChange(e) {
-    const userValue = e.target.value;
-    setErrorMessage("");
-
-    if (includesHangul(userValue)) {
-      setErrorMessage("한글은 입력할 수 없습니다.");
-    }
-    setValue(userValue.toUpperCase());
-  }
-
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    setErrorMessage("");
-
-    if (value === "") {
-      setErrorMessage("빈 값으로 생성할 수 없습니다.");
-      return; // 함수가 아래의 updateMainCat() 까지 불리지 않고 끝날 수 있게..
-    }
-    updateMainCat(value);
-  }
-
-  return (
-    <form onSubmit={handleFormSubmit}>
-      <input
-        type="text"
-        name="name"
-        placeholder="영어 대사를 입력해주세요"
-        value={value}
-        onChange={handleInputChange}
-      />
-      <button type="submit">생성</button>
-      <p style={{ color: "red" }}>{errorMesssage}</p>
-    </form>
-  );
-};
-
-function CatItem(props) {
-  return (
-    <li>
-      <img src={props.img} style={{ width: "150px" }} />
-    </li>
-  );
-}
-
-function Favorites({ favorites }) {
-  if (favorites.length === 0) {
-    return (
-      <div>사진 위 하트를 눌러 고양이 사진을 저장해보세요!</div>
-    )
-  }
-
-  return (
-    <ul className="favorites">
-      {favorites.map((cat) => (
-        <CatItem img={cat} key={cat} />
-      ))}
-    </ul>
-  );
-}
-
-const MainCard = ({ img, onHeartClick, alreadyFavorite }) => {
-  const heartIcon = alreadyFavorite ? "💖" : "🤍";
-  return (
-    <div className="main-card">
-      <img src={img} alt="고양이" width="400" />
-      <button onClick={onHeartClick}>{heartIcon}</button>
-    </div>
-  );
-};
 
 const App = () => {
   const CAT1 =
