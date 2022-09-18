@@ -37,6 +37,17 @@
   }
 } */
 
+* {
+  font-family: 'MonoplexKR-Regular';
+}
+
+@font-face {
+  font-family: 'MonoplexKR-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-kr@1.0/MonoplexKR-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   text-align: center;
 }
@@ -57,4 +68,46 @@ body {
 
 #disqus_thread {
   margin-top: 100px;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  font-family: 'ONE-Mobile-POP';
+  letter-spacing: 5px;
+  color: rgb(70, 70, 70);
+  margin: 50px 0 50px 0;
+}
+
+@font-face {
+  font-family: 'ONE-Mobile-POP';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+form>button {
+  width: 4em;
+  height: 3em;
+  margin-left: 5px;
+  border: none;
+  color: #ffffff;
+  background-color: #000000;
+  border-radius: 10%;
+}
+
+form>button:hover {
+  color: red;
+}
+
+form>button:active {
+  top: 4px;
+  position: relative;
+}
+
+form>input {
+  width: 16em;
+  height: 3em;
+  border-radius: 10%;
 }
