@@ -1,50 +1,11 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
 * {
-  font-family: 'MonoplexKR-Regular';
+  font-family: 'RIDIBatang';
 }
 
 @font-face {
-  font-family: 'MonoplexKR-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-kr@1.0/MonoplexKR-Regular.woff2') format('woff2');
-  font-weight: 400;
+  font-family: 'RIDIBatang';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
+  font-weight: normal;
   font-style: normal;
 }
 
@@ -53,9 +14,29 @@ body {
 }
 
 .main-card button {
+  width: 30px;
+  height: 20px;
   position: relative;
   left: -45px;
   bottom: 15px;
+  border-radius: 10%;
+  border-style: none;
+  background-color: #000000;
+}
+
+@media (max-width: 430px) {
+
+  /* 430 = 이미지 크기 + 버튼 크기 */
+  .main-card button {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    left: 41.5%;
+    bottom: 35px;
+    border-radius: 10%;
+    border-style: none;
+    background-color: #000000;
+  }
 }
 
 .favorites {
@@ -83,20 +64,13 @@ body {
 }
 
 h1 {
-  font-family: 'ONE-Mobile-POP';
+  font-family: 'RIDIBatang';
   letter-spacing: 5px;
   color: rgb(70, 70, 70);
   margin: 50px 0 50px 0;
 }
 
-@font-face {
-  font-family: 'ONE-Mobile-POP';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-form>button {
+form button {
   width: 4em;
   height: 3em;
   margin-left: 5px;
@@ -106,17 +80,27 @@ form>button {
   border-radius: 10%;
 }
 
-form>button:hover {
+form button:hover {
   color: red;
 }
 
-form>button:active {
+form button:active {
   top: 4px;
   position: relative;
 }
 
-form>input {
+form input {
   width: 16em;
   height: 3em;
   border-radius: 10%;
+}
+
+.main-card img {
+  width: 400px;
+}
+
+@media (max-width: 400px) {
+  .main-card img {
+    width: 100%;
+  }
 }
